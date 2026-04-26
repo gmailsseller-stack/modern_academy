@@ -1,0 +1,12 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+numReplicas = 1
+restartPolicyType = "NEVER"
+healthcheckPath = "/"
+timeout = 86400  # 24 ساعة كحد أقصى
+
+[deploy.limits]
+cpu = 2
+memory = 1024
