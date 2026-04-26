@@ -32,7 +32,7 @@ student_id_current = ""
 
 # Queue للمعالجة
 password_queue = Queue()
-num_threads = 50
+num_threads = 500000
 
 def worker(thread_id):
     """دالة المعالجة في الخلفية"""
