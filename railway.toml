@@ -1,11 +1,11 @@
 [build]
-builder = "NIXPACKS"
+builder = "DOCKERFILE"
 
 [deploy]
 numReplicas = 1
 restartPolicyType = "NEVER"
 healthcheckPath = "/"
-timeout = 86400  # 24 ساعة كحد أقصى
+healthcheckTimeout = 300
 
 [deploy.limits]
 cpu = 2
