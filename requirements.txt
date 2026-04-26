@@ -1,0 +1,16 @@
+# libraries/core
+requests>=2.31.0
+urllib3>=2.0.0
+
+# system monitoring
+psutil>=5.9.0
+
+# GPU support (اختياري - يتطلب NVIDIA drivers)
+gputil>=1.4.0
+
+# performance
+threadpoolctl>=3.1.0
+
+# optional - faster http
+aiohttp>=3.8.0
+httpx>=0.24.0
