@@ -100,9 +100,14 @@ def worker(thread_id):
             local_checked = 0
             last_time = current_time
 
+# ========== Routes ==========
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/health')
+def health():
+    return "OK", 200
 
 @app.route('/api/start', methods=['POST'])
 def start_search():
@@ -129,6 +134,7 @@ def start_search():
     successful_attempts = 0
     failed_attempts = 0
     student_id_current = student_id
+    total_passwords = int(end_range) - int(start_range) + 1
     
     # إنشاء queue جديدة
     password_queue = Queue()
@@ -184,13 +190,6 @@ def get_results():
         'checked': len(checked_passwords)
     })
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/health')
-def health():
-    return "OK", 200
-    
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
