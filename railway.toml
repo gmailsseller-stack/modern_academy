@@ -4,7 +4,7 @@ builder = "DOCKERFILE"
 [deploy]
 numReplicas = 1
 restartPolicyType = "NEVER"
-healthcheckPath = "/"
+healthcheckPath = "/health"
 healthcheckTimeout = 300
 
 [deploy.limits]
