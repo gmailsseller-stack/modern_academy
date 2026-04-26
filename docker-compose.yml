@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  password-cracker:
+    build: .
+    container_name: password-cracker
+    restart: unless-stopped
+    
+    # استخدم GPU إذا كان متاحاً
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
+    # أو استخدم runtime: nvidia (للإصدارات الأقدم)
+    # runtime: nvidia
+    
+    volumes:
+      # حفظ النتائج والـ checkpoints على المضيف
+      - ./results:/app/results
+      - ./checkpoints:/app/checkpoints
+      
+      # اختياري: ربط ملفات التكوين
+      - ./found_passwords.txt:/app/found_passwords.txt
+      - ./checkpoint.json:/app/checkpoint.json
+    
+    environment:
+      # إعدادات الأداء
+      - PYTHONUNBUFFERED=1
+      - OMP_NUM_THREADS=0  # استخدم كل CPUs
+      - MKL_NUM_THREADS=0  # استخدم كل CPUs
+      - OPENBLAS_NUM_THREADS=0  # استخدم كل CPUs
+    
+    # قيود الموارد (اختياري)
+    # cpus: 4.0
+    # mem_limit: 8g
+    
+    # وضع الشبكة
+    network_mode: bridge
+    
+    stdin_open: true
+    tty: true
